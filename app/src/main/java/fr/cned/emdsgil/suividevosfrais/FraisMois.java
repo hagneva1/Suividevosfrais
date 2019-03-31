@@ -160,7 +160,7 @@ class FraisMois implements Serializable {
         protected Void doInBackground(FraisMois... params) {
             try {
 
-                URL url = new URL("http://www.hagneva1ppe.fr/controleurs/appGetData.php");
+                URL url = new URL("https://www.hagneva1ppe.fr/controleurs/appGetData.php");
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -206,7 +206,7 @@ class FraisMois implements Serializable {
         protected Void doInBackground(String... params) {
             try {
 
-                URL url = new URL("http://www.hagneva1ppe.fr/controleurs/appSendData.php");
+                URL url = new URL("https://www.hagneva1ppe.fr/controleurs/appSendData.php");
 
                 String id = params[0];
                 String annee = params[1];

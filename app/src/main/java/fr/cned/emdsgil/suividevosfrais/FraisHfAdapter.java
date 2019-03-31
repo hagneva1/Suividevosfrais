@@ -126,7 +126,7 @@ class FraisHfAdapter extends BaseAdapter {
         protected Void doInBackground(String... params) {
             try {
 
-                URL url = new URL("http://www.hagneva1ppe.fr/controleurs/appRemoveData.php");
+                URL url = new URL("https://www.hagneva1ppe.fr/controleurs/appRemoveData.php");
 
                 String id = params[0];
 

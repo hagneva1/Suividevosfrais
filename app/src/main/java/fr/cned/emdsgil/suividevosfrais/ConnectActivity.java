@@ -70,7 +70,7 @@ public class ConnectActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... params) {
             try {
-                URL url = new URL("http://www.hagneva1ppe.fr/controleurs/appConnect.php");
+                URL url = new URL("https://www.hagneva1ppe.fr/controleurs/appConnect.php");
                 String login = params[0];
                 String pwd = params[1];
 
