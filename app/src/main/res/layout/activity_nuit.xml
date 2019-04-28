@@ -53,7 +53,7 @@
                 android:lines="1"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:text="@+string/title_frais_nuit"
+                android:text="@string/title_frais_nuit"
                 android:textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
