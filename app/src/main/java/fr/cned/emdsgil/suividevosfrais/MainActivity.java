@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHf)), HfActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
-        cmdTransfert_clic();
     }
 
     @Override
@@ -50,15 +49,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Cas particulier du bouton pour le transfert d'informations vers le serveur
-     */
-    private void cmdTransfert_clic() {
-        findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                // envoi les informations sérialisées vers le serveur
-                // en construction
-            }
-        });
-    }
 }
