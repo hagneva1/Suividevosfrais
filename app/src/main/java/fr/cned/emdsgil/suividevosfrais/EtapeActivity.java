@@ -14,6 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -66,6 +69,7 @@ public class EtapeActivity extends AppCompatActivity {
      * Valorisation des propriétés avec les informations affichées
      */
     private void valoriseProprietes() throws InterruptedException {
+        ((DatePicker)findViewById(R.id.datEtape)).setMaxDate(new Date().getTime());
         annee = ((DatePicker)findViewById(R.id.datEtape)).getYear() ;
         mois = ((DatePicker)findViewById(R.id.datEtape)).getMonth() + 1 ;
         // récupération de la qte et du vehicule correspondant au mois actuel
@@ -73,6 +77,18 @@ public class EtapeActivity extends AppCompatActivity {
         fraisMois = new FraisMois(ConnectActivity.idUser, annee, mois);
         TimeUnit.MILLISECONDS.sleep(1000);
         qte = fraisMois.getEtape();
+        Calendar now = Calendar.getInstance();
+        if (now.get(Calendar.YEAR) == annee && now.get(Calendar.MONTH) == mois -1) {
+            findViewById(R.id.txtEtape).setEnabled(true);
+            findViewById(R.id.cmdEtapeMoins).setEnabled(true);
+            findViewById(R.id.cmdEtapePlus).setEnabled(true);
+            findViewById(R.id.cmdEtapeValider).setEnabled(true);
+        } else {
+            findViewById(R.id.txtEtape).setEnabled(false);
+            findViewById(R.id.cmdEtapeMoins).setEnabled(false);
+            findViewById(R.id.cmdEtapePlus).setEnabled(false);
+            findViewById(R.id.cmdEtapeValider).setEnabled(false);
+        }
         ((EditText)findViewById(R.id.txtEtape)).setText(String.format(Locale.FRANCE, "%d", qte)) ;
     }
 

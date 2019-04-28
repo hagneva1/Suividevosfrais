@@ -14,6 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -66,6 +69,7 @@ public class NuitActivity extends AppCompatActivity {
      * Valorisation des propriétés avec les informations affichées
      */
     private void valoriseProprietes() throws InterruptedException {
+        ((DatePicker)findViewById(R.id.datNuit)).setMaxDate(new Date().getTime());
         annee = ((DatePicker)findViewById(R.id.datNuit)).getYear() ;
         mois = ((DatePicker)findViewById(R.id.datNuit)).getMonth() + 1 ;
         // récupération de la qte et du vehicule correspondant au mois actuel
@@ -73,6 +77,18 @@ public class NuitActivity extends AppCompatActivity {
         fraisMois = new FraisMois(ConnectActivity.idUser, annee, mois);
         TimeUnit.MILLISECONDS.sleep(1000);
         qte = fraisMois.getNuitee();
+        Calendar now = Calendar.getInstance();
+        if (now.get(Calendar.YEAR) == annee && now.get(Calendar.MONTH) == mois -1) {
+            findViewById(R.id.txtNuit).setEnabled(true);
+            findViewById(R.id.cmdNuitMoins).setEnabled(true);
+            findViewById(R.id.cmdNuitPlus).setEnabled(true);
+            findViewById(R.id.cmdNuitValider).setEnabled(true);
+        } else {
+            findViewById(R.id.txtNuit).setEnabled(false);
+            findViewById(R.id.cmdNuitMoins).setEnabled(false);
+            findViewById(R.id.cmdNuitPlus).setEnabled(false);
+            findViewById(R.id.cmdNuitValider).setEnabled(false);
+        }
         ((EditText)findViewById(R.id.txtNuit)).setText(String.format(Locale.FRANCE, "%d", qte)) ;
     }
 

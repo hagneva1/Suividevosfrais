@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class HfRecapActivity extends AppCompatActivity {
@@ -55,6 +56,7 @@ public class HfRecapActivity extends AppCompatActivity {
 	 * Affiche la liste des frais hors forfaits de la date sélectionnée
 	 */
 	private void afficheListe() throws InterruptedException {
+		((DatePicker)findViewById(R.id.datHfRecap)).setMaxDate(new Date().getTime());
 		Integer annee = ((DatePicker)findViewById(R.id.datHfRecap)).getYear() ;
 		Integer mois = ((DatePicker)findViewById(R.id.datHfRecap)).getMonth() + 1 ;
 		// récupération des frais HF pour cette date

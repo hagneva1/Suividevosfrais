@@ -14,6 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -69,6 +72,7 @@ public class KmActivity extends AppCompatActivity {
 	 * Valorisation des propriétés avec les informations affichées
 	 */
 	private void valoriseProprietes() throws InterruptedException {
+		((DatePicker)findViewById(R.id.datKm)).setMaxDate(new Date().getTime());
 		annee = ((DatePicker)findViewById(R.id.datKm)).getYear() ;
 		mois = ((DatePicker)findViewById(R.id.datKm)).getMonth() + 1 ;
         //Remplissage de la liste des véhicules
@@ -97,6 +101,18 @@ public class KmActivity extends AppCompatActivity {
                 spinner.setSelection(1);
                 break;
         }
+		Calendar now = Calendar.getInstance();
+        if (now.get(Calendar.YEAR) == annee && now.get(Calendar.MONTH) == mois -1) {
+			findViewById(R.id.txtKm).setEnabled(true);
+			findViewById(R.id.cmdKmMoins).setEnabled(true);
+			findViewById(R.id.cmdKmPlus).setEnabled(true);
+			findViewById(R.id.cmdKmValider).setEnabled(true);
+		} else {
+			findViewById(R.id.txtKm).setEnabled(false);
+			findViewById(R.id.cmdKmMoins).setEnabled(false);
+			findViewById(R.id.cmdKmPlus).setEnabled(false);
+			findViewById(R.id.cmdKmValider).setEnabled(false);
+		}
 		((EditText)findViewById(R.id.txtKm)).setText(String.format(Locale.FRANCE, "%d", qte)) ;
 	}
 	

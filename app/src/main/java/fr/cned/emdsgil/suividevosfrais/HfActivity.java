@@ -12,6 +12,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class HfActivity extends AppCompatActivity {
 
 	@Override
@@ -26,6 +29,7 @@ public class HfActivity extends AppCompatActivity {
         // chargement des méthodes événementielles
 		imgReturn_clic() ;
 		cmdAjouter_clic() ;
+		((DatePicker)findViewById(R.id.datHf)).setMaxDate(new Date().getTime());
 	}
 
 	@Override
@@ -67,10 +71,15 @@ public class HfActivity extends AppCompatActivity {
 				Integer jour = ((DatePicker)findViewById(R.id.datHf)).getDayOfMonth() ;
 				Float montant = Float.valueOf((((EditText)findViewById(R.id.txtHf)).getText().toString()));
 				String motif = ((EditText)findViewById(R.id.txtHfMotif)).getText().toString() ;
-				FraisMois fraisMois = new FraisMois(ConnectActivity.idUser, annee, mois);
-				fraisMois.addFraisHf(montant, motif, jour, -1);
-				fraisMois.register(fraisMois);
-    			retourActivityPrincipale() ;    		
+                Calendar now = Calendar.getInstance();
+                if (now.get(Calendar.YEAR) == annee && now.get(Calendar.MONTH) == mois -1) {
+                    FraisMois fraisMois = new FraisMois(ConnectActivity.idUser, annee, mois);
+                    fraisMois.addFraisHf(montant, motif, jour, -1);
+                    fraisMois.register(fraisMois);
+                    retourActivityPrincipale() ;
+                } else {
+                    findViewById(R.id.txtErrorHf).setVisibility(View.VISIBLE);
+                }
     		}
     	}) ;    	
     }

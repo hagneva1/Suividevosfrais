@@ -14,6 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -66,6 +69,7 @@ public class RepasActivity extends AppCompatActivity {
      * Valorisation des propriétés avec les informations affichées
      */
     private void valoriseProprietes() throws InterruptedException {
+        ((DatePicker)findViewById(R.id.datRepas)).setMaxDate(new Date().getTime());
         annee = ((DatePicker)findViewById(R.id.datRepas)).getYear() ;
         mois = ((DatePicker)findViewById(R.id.datRepas)).getMonth() + 1 ;
         // récupération de la qte et du vehicule correspondant au mois actuel
@@ -73,6 +77,18 @@ public class RepasActivity extends AppCompatActivity {
         fraisMois = new FraisMois(ConnectActivity.idUser, annee, mois);
         TimeUnit.MILLISECONDS.sleep(1000);
         qte = fraisMois.getRepas();
+        Calendar now = Calendar.getInstance();
+        if (now.get(Calendar.YEAR) == annee && now.get(Calendar.MONTH) == mois -1) {
+            findViewById(R.id.txtRepas).setEnabled(true);
+            findViewById(R.id.cmdRepasMoins).setEnabled(true);
+            findViewById(R.id.cmdRepasPlus).setEnabled(true);
+            findViewById(R.id.cmdRepasValider).setEnabled(true);
+        } else {
+            findViewById(R.id.txtRepas).setEnabled(false);
+            findViewById(R.id.cmdRepasMoins).setEnabled(false);
+            findViewById(R.id.cmdRepasPlus).setEnabled(false);
+            findViewById(R.id.cmdRepasValider).setEnabled(false);
+        }
         ((EditText)findViewById(R.id.txtRepas)).setText(String.format(Locale.FRANCE, "%d", qte)) ;
     }
 
